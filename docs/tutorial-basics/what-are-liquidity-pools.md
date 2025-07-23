@@ -65,12 +65,33 @@ The provider rewards **aren’t stored separately** or held in reserve. They are
 
 ---
 
+## ⚠️ Risk Considerations
+
+CX Chain is built for long-term fairness and sustainability — but like any economic system, there are dynamics to understand:
+
+### Short-Term Imbalance
+
+- **When a player wins big**, liquidity providers may temporarily see their position decrease (since funds are pulled from the pool).
+- This is expected behavior — **games with positive expected value (RTP < 100%)** ensure that over time, the pool grows and providers profit.
+
+### Risk Mitigation
+
+To protect liquidity providers and ensure sustainability:
+
+- **Maximum bet size and payouts are limited** based on the **current pool balance**.
+- This limit is enforced on-chain by smart contracts and ensures no single win can drain the pool.
+
+> 💡 As a result, **losses are temporary and bounded**, while long-term returns are positive due to game math and protocol design.
+
+---
+
 ## 🏁 Summary
 
 CX Chain liquidity pools allow anyone to participate in the on-chain gaming economy by contributing capital and earning rewards:
 
 - Pools are **token-specific** and fully transparent.
 - Rewards are **automatic, compounding**, and **proportional**.
-- CX Chain’s fee share is **public and adjustable** to ensure ecosystem stability.
+- CX Chain’s platform fee is **public and adjustable** to keep the system balanced.
+- **Short-term risk is mitigated**, and long-term growth is driven by statistically favorable game mechanics.
 
 You can be **the house** — just deposit into a pool and start earning from every bet made on the network.
