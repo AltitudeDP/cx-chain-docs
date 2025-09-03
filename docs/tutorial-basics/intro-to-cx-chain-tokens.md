@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Introduction to the CX Chain Ecosystem** 
+# Introduction to the CX Chain Ecosystem
 
  **A Smarter, Fairer Hub for Decentralized Gaming** 
 
