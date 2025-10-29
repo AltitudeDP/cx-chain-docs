@@ -5,26 +5,26 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'CX Chain',
-  tagline: 'Where games are permissionless, yield is native, and fairness is verifiable.',
+  title: 'CX Chain Documentation',
+  tagline: 'Technical documentation for CX Chain decentralized gaming platform',
   favicon: 'img/favicon.ico',
   
-
+  
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://docs.cxchain.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'AltitudeDP', // Usually your GitHub org/user name.
+  projectName: 'cx-chain-docs', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -90,11 +90,10 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Docs',
+          label: 'Documentation',
         },
-        // {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/AltitudeDP/cxchain-roulette-avacloudVRF',
           label: 'GitHub',
           position: 'right',
         },
@@ -104,42 +103,50 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Documentation',
           items: [
             {
-              label: 'Introduction to CX Chain',
+              label: 'Introduction',
               to: '/docs/intro',
             },
             {
-              label: 'CX Chain Basics',
-              to: '/docs/category/cx-chain-basics',
-            }
+              label: 'Platform Overview',
+              to: '/docs/tutorial-basics/what-is-cx-chain',
+            },
+            {
+              label: 'VRF Integration',
+              to: '/docs/tutorial-basics/cx-chain-vrf',
+            },
+            {
+              label: 'Liquidity Pools',
+              to: '/docs/tutorial-basics/what-are-liquidity-pools',
+            },
           ],
         },
         {
           title: 'Community',
           items: [
             {
-              label: 'X',
+              label: 'X (Twitter)',
               href: 'https://x.com/cxchainofficial?s=21&t=Pwg_rjrUuHGD0aVTLXbd5A',
             },
           ],
         },
         {
-          title: 'More',
+          title: 'Development',
           items: [
             {
-              label: 'Blog',
-              to: '/blog',
+              label: 'GitHub - Game Contracts',
+              href: 'https://github.com/AltitudeDP/cxchain-roulette-avacloudVRF',
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              label: 'GitHub - Documentation',
+              href: 'https://github.com/AltitudeDP/cx-chain-docs',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} CX Chain. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,

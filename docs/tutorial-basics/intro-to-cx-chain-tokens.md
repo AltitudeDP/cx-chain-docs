@@ -2,66 +2,157 @@
 sidebar_position: 2
 ---
 
-# Introduction to the CX Chain Ecosystem
+# Token Economics
 
- **A Smarter, Fairer Hub for Decentralized Gaming** 
+Most blockchains have a token problem: the rich get richer, and everyone else gets diluted. CX Chain takes a different approach with a dual-asset system that separates economic participation from network control. Let's break down how it works and why it matters.
 
- Welcome to CX Chain, the decentralized game execution layer designed for performance, fairness, and community ownership. Unlike general-purpose blockchains, CX Chain is a purpose-built L1 network that integrates game economies with automated liquidity management and verifiable randomness. 
+## Two Assets, Two Purposes
 
- Our ecosystem is powered by two core assets that work in tandem to secure the network and drive its economy: the **CX Token (CX)** and the **CX Node License (NFT)**. Whether you are a player, developer, or network supporter, these assets are your keys to participating in a transparent and rewarding gaming environment. 
+Think of CX Chain's economy as having two different types of keys. The **CX token** is like cash—you use it for transactions, governance, and earning yield through liquidity provision. It's fungible, divisible, and there are a billion of them.
 
- --- 
+The **House Node License NFT** is like a property deed—it grants you the right to validate transactions and earn protocol fees. It's non-fungible, indivisible, and there are only 1,000 of them. Ever.
 
- ### **The Core Digital Assets** 
+| What It Is | Type | How Many | What It Does |
+|------------|------|----------|--------------|
+| **CX Token** | Fungible (ERC-20) | 1,000,000,000 | Governance voting, transaction fees, liquidity provision, developer collateral |
+| **House Node License** | NFT (ERC-721) | 1,000 total | Run validators, earn protocol fees, participate in governance |
 
- The CX Chain economy is balanced by two distinct but interconnected assets. 
+:::tip Why Two Assets?
+By separating validation rights from token wealth, we prevent plutocracy. You can't just buy a billion tokens and dominate the network. You need a House Node License, and there are only 1,000 of those. This design choice keeps the network decentralized even as token distribution becomes more concentrated over time.
+:::
 
-| Asset | Type | Total Supply | Core Function |
-| :--- | :--- | :--- | :--- |
-| **CX Token (CX)** | Native Utility & Governance Token | 1,000,000,000 CX | Powers transactions, governance, staking, and access to the ecosystem. |
-| **CX Node License** | Non-Fungible Token (NFT) | 1,000 Licenses | Grants the right to validate transactions, secure the network, and earn protocol fees. |
+## The CX Token: Your Swiss Army Knife
 
- --- 
+There are exactly one billion CX tokens, minted at genesis. No more will ever be created—in fact, the supply constantly decreases through fee burning. Let's look at what you can actually do with them.
 
- ### **The CX Token: Fuel for the Ecosystem** 
+### Governance Participation
 
- The CX Token is the native utility token of the CX Chain, essential for interacting with the network and shaping its future. 
+CX tokens are designed to serve as the governance vehicle for the protocol. Token holders will be able to participate in protocol decisions regarding new game additions, smart contract approvals, and infrastructure upgrades. The governance system is being developed to work in combination with the NFT-based validation system to maintain decentralization.
 
- **Key Utilities:** 
- *   **Governance:** CX Token holders steer the future of the ecosystem. Use your tokens to vote directly or delegate your voting power on proposals for new games, protocol upgrades, and smart contract approvals. 
- *   **Transaction & Operational Fees:** CX is used to pay for gas fees and other on-chain operations. This applies to stakers, delegators, and game developers, while players enjoy a fee-free gaming experience. 
- *   **Liquidity & Staking:** Stake CX into decentralized liquidity pools to provide the "house capital" for games on the network. In return, you can earn a share of the gameplay revenue. 
- *   **Developer & Publisher Collateral:** To publish games and access network infrastructure, developers must hold and stake CX Tokens. This collateral disincentivizes malicious behavior through slashing penalties. 
- *   **Player Benefits:** Holding or staking CX can unlock exclusive games, provide rake rebates, or even enable rake-free gameplay. Players can also choose to gamble directly with CX tokens. 
+### Pay for Network Operations
 
- --- 
+Every transaction costs a small amount of CX. Validators pay fees to process transactions. Developers pay fees to deploy contracts. Liquidity providers pay fees to manage positions. Players... well, player transaction fees are often subsidized by the protocol to encourage participation.
 
- ### **The CX Node License NFT: Powering the Network** 
+Here's the interesting part: a portion of every fee gets burned (flared) forever. The supply shrinks with every transaction. More activity means more burning means more scarcity. It's programmatic supply reduction without the complexity of traditional buybacks or the uncertainty of discretionary burns.
 
- The CX Node License is an NFT that grants the holder the right to operate a "House Node." These nodes are the backbone of CX Chain, responsible for validating transactions, ensuring game fairness, and maintaining network security. 
+### Earn as the House
 
- **Capabilities and Rewards:** 
- *   **Network Validation & Security:** License holders operate the validator nodes that process transactions and secure the network. 
- *   **Earning Protocol Revenue:** House Nodes earn a share of protocol fees generated from transaction processing and smart contract executions. They also earn yield from assets delegated to them. 
+Deposit CX tokens into liquidity pools and you're effectively becoming the casino. Your tokens provide capital for game payouts, and you earn a share of the house edge. You receive LP tokens that represent your proportional ownership, and as the pool grows from player losses, your LP tokens become worth more.
 
+The compounding happens automatically—no claiming, no restaking, no gas fees. Just deposit and watch your slice of the pool appreciate. We'll dive deeper into this in the [Liquidity Pools](/docs/tutorial-basics/what-are-liquidity-pools) section.
 
- A key distinction of the CX Chain is that **no token staking is required for validator eligibility.** Your right to validate is granted by the NFT license itself, simplifying the process of securing the network. Batch 1 of these licenses (250 nodes) has already sold out. 
+### Put Skin in the Game as a Developer
 
- --- 
+Building a game on CX Chain? You'll need to deposit collateral in CX tokens. This isn't a toll—it's a security mechanism. If your contract has bugs or you try something malicious, you lose your collateral through slashing. Build quality games, earn your collateral back plus revenue. Build garbage, lose money. Incentives aligned.
 
- ### **Tokenomics: A Dynamic, Deflationary Model** 
+### Get Player Perks (Optional)
 
- The CX Token was created with a fixed supply of **1 billion tokens** at genesis. There is no fixed inflation rate or ongoing token emission. 
+Holding CX tokens can unlock player benefits like access to exclusive games, rake rebates ranging from 10-30% depending on your holdings, eligibility for rake-free gameplay periods, and the ability to wager directly in CX tokens. These are optional features—you can play without holding CX—but they reward long-term community members.
 
- Instead, the token supply is designed to decrease over time through a process called **"flaring."** A portion of all network transaction fees paid in CX is permanently burned, dynamically reducing the total supply. This means that as network activity increases, the scarcity of the CX Token is designed to increase as well. 
+---
 
- To further support this dynamic, the treasury may periodically use revenue to buy back and burn tokens from the open market. 
+## House Node Licenses: Your Validator Pass
 
- --- 
+Here's the thing about traditional proof-of-stake: you need a fortune in tokens to run a validator. CX Chain flips this model with House Node License NFTs—scarce assets that grant validation rights regardless of your token holdings.
 
- ### **Ensuring Long-Term Security and Stability** 
+### The Scarcity Model
 
- The integrity of the CX Chain ecosystem is protected by robust, smart contract-enforced mechanisms. 
+There will only ever be 1,000 House Node Licenses. Not 1,000 per year, not 1,000 until we change our mind—1,000 total, forever. The first batch of 250 has already been distributed. Future batches will come gradually, and once all 1,000 are out, that's it.
 
- *   **Slashing & Security:** Both game publishers and node operators are required to post collateral in CX Tokens. This collateral is subject to "slashing"—meaning it can be forfeited and either burned or redistributed—if they engage in malicious acts or violate protocol rules. This ensures all key participants are incentivized to act in the best interest of the network. 
- *   **Smart Contract-Enforced Vesting:** All token release schedules for team members, advisors, and early stakeholders are managed by audited smart contracts. These schedules include cliff and linear vesting periods to align all parties with the long-term health of the project and prevent premature sell pressure.
+These NFTs are fully transferable on standard NFT marketplaces. Got a license but don't want to validate anymore? Sell it. Want to get into validation? Buy one on the secondary market or wait for the next batch release.
+
+:::warning Limited Supply = Real Scarcity
+The 1,000-license cap isn't arbitrary marketing—it's a security feature. Too many validators and the network becomes unwieldy. Too few and it becomes centralized. 1,000 is the sweet spot, and the scarcity creates economic value that incentivizes proper validation behavior.
+:::
+
+### What a License Gets You
+
+**Run a Validator Node**: With a license, you can operate a validator, process transactions, and participate in network consensus. You earn protocol fees from every transaction on the network—the more activity, the more you earn.
+
+**Accept Delegations**: Other users can delegate their assets to your validator, and you earn a cut of their staking rewards. Note that delegators must hold a minimum amount of CX tokens as collateral (e.g., 10% of delegated value). It's like running a validation-as-a-service business, except the protocol handles all the complicated stuff.
+
+### How to Actually Run a Validator
+
+You've got two paths here. **Self-operate** if you're technically capable and want full control. You'll run your own hardware, manage validator software, handle updates, monitor uptime, and keep everything running smoothly. It's more work, but you keep all the fees.
+
+Or **delegate to a service** like Hypha. They handle all the technical operations—hardware, software, updates, monitoring—while you retain the fee and revenue rights. You still earn, they still earn, everyone's happy. This is perfect if you want validator income without validator headaches.
+
+The genius of the NFT model is that it completely eliminates minimum token staking. A whale with a billion CX tokens can't run 100 validators. They can run exactly as many validators as they have licenses, same as everyone else. Validation power is capped and democratized.
+
+---
+
+## How the Supply Shrinks Over Time
+
+Most crypto projects have an inflation problem. New tokens constantly enter circulation, diluting everyone who came before. CX Chain goes the opposite direction—deflationary by design, no exceptions.
+
+### The Math Is Simple
+
+Start with one billion CX tokens at genesis. Never mint more. Actually, do the opposite—burn tokens with every transaction. The result? Constant supply reduction as long as the network is active.
+
+Every transaction generates gas costs paid in CX. A portion of these fees gets burned forever (permanent supply reduction), validators receive rewards for network security, and the protocol treasury receives a portion which may be used for additional buybacks and burns.
+
+:::info More Activity = More Scarcity
+The burning isn't discretionary or dependent on governance votes. It's hardcoded into the protocol. Every transaction that happens on CX Chain automatically reduces the supply. High activity months see more burning. It's programmatic scarcity.
+:::
+
+The protocol treasury can amplify this effect by occasionally buying CX tokens on the open market and burning them. This creates additional supply reduction beyond the automatic transaction burning. It's not guaranteed, but it's an option when the treasury has excess funds.
+
+### Why This Matters
+
+Think about the incentives. If you're a token holder, you benefit from network activity even if you're not actively participating. More games launching means more transactions means more burning means more scarcity means (probably) higher token value.
+
+Everyone who contributes to network activity—players, liquidity providers, developers, validators—is indirectly buying back supply from passive holders through the burn mechanism. Long-term holders win. Early participants win. Active users win. It's not zero-sum.
+
+Compare this to traditional projects where new tokens constantly dump on early supporters. Or projects where "buyback and burn" is discretionary and often gets forgotten when times are tough. CX Chain's deflationary mechanism is automatic, transparent, and permanent.
+
+---
+
+## Keeping Everyone Honest
+
+Economic systems without consequences become playgrounds for bad actors. CX Chain enforces accountability through slashing and vesting mechanisms that make misconduct expensive.
+
+### Slashing: Lose Money for Bad Behavior
+
+Deploy a malicious game contract? Slashed. Run a validator that goes offline constantly? Slashed. Violate protocol standards? Slashed. The protocol enforces penalties automatically through smart contracts—no governance vote required for obvious violations.
+
+When someone gets slashed, their collateral tokens are either burned (reducing supply for everyone else) or redistributed to affected parties (making victims whole). In ambiguous cases, governance determines the allocation. The key point: misbehavior has immediate, automatic economic consequences.
+
+:::warning Play by the Rules or Pay the Price
+Slashing isn't theoretical. The code enforces it. If you're a developer, audit your contracts thoroughly. If you're a validator, maintain high uptime. If you're interacting with the protocol, understand the rules. Economic security works because the penalties are real.
+:::
+
+### Vesting: No Quick Exits for Insiders
+
+Team and advisor tokens are locked in smart contracts with multi-year vesting schedules. There's an initial cliff period where nothing unlocks, followed by linear vesting over several years. Everything is on-chain, transparent, and verifiable.
+
+No administrator can override the vesting schedule. No "emergency unlock" exists for team members who suddenly need liquidity. The vesting contracts are immutable—what was promised is what gets delivered, on the timeline that was promised.
+
+This prevents the classic crypto rug pull where insiders dump on early supporters. Long-term alignment isn't just encouraged—it's enforced through code.
+
+---
+
+## The Virtuous Cycle
+
+Good economic design creates positive feedback loops. CX Chain's tokenomics aren't just sustainable—they're self-reinforcing. Let me show you how the cycle works.
+
+New games launch and attract players. Players generate transaction volume. Transaction volume burns tokens and creates scarcity. Scarcity (theoretically) increases token value. Higher token value attracts more liquidity providers. More liquidity enables bigger games with higher limits. Bigger games attract more players. More players generate more transactions. Repeat.
+
+Every participant benefits from everyone else's activity. Liquidity providers earn more as game volume increases. Validators process more transactions and earn more fees. Token holders see supply reduction from increased burning. Developers get more players for their games. Players get more games to choose from.
+
+:::tip Aligned Incentives Are Everything
+The difference between a sustainable protocol and a slow-motion rug pull is incentive alignment. When growing the pie benefits everyone more than grabbing a bigger slice, people build instead of extract. That's the game theory behind CX Chain's dual-asset model.
+:::
+
+Nobody succeeds at others' expense. Everyone succeeds together, or the protocol doesn't succeed at all. That's not idealism—that's just good mechanism design.
+
+---
+
+## Bringing It All Together
+
+Let's recap the token economy: **CX tokens** are used for governance participation, transaction fees, liquidity provision, developer collateral, and optional player perks. **House Node Licenses** grant validation rights, generate fee income, and prevent plutocracy.
+
+The supply is **deflationary by design**—a portion of every transaction fee burns forever, with optional treasury buybacks on top. **Slashing mechanisms** make misbehavior expensive. **Vesting schedules** ensure team alignment over years, not quarters.
+
+Everything fits together to create a system where long-term thinking beats short-term extraction. That's rare in crypto. It's what makes CX Chain worth paying attention to.
+
+Want to understand how liquidity provision actually works in practice? Check out the [Liquidity Pools](/docs/tutorial-basics/what-are-liquidity-pools) documentation next.
