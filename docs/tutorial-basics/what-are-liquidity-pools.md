@@ -33,7 +33,7 @@ Here's an important detail: each token type has its own LP token. When you depos
 - You can provide liquidity to multiple pools simultaneously
 - LP token prices are calculated independently for each asset
 
-Everything is transparent and on-chain. Every deposit, every withdrawal, every game payout—all publicly visible. You can audit the pool balance, verify fee distributions, and track your position in real-time without trusting anyone.
+Everything is transparent and on-chain. Every deposit, every withdrawal, every game payout—all publicly visible. You can audit the pool balance, verify fee distributions, and track your position in real-time without trusting anyone. Withdrawals are not instant: you request a withdrawal, then execute it after the current epoch has ended and been finalized (see [Epochs and delayed withdrawals](#epochs-and-delayed-withdrawals)).
 
 ---
 
@@ -47,43 +47,37 @@ Every game on CX Chain has a mathematically defined Return to Player (RTP). This
 
 When players place bets, the pool doesn't just absorb the entire amount. There's a precise split hardcoded into the contract:
 
-**95% goes to LP providers** — This portion flows directly into the `totalUnderlying` balance of the pool. It increases the pool's value immediately, which means your LP tokens are worth more.
+**95% is reserved for the LP pool** — This portion is placed in `pendingBets` (not added to `totalUnderlying` yet). LP token price is based on `totalUnderlying`, so your LP value does not change until the bet is settled. When the bet is **lost**, the game calls `resolveBet` and that amount moves from `pendingBets` to `totalUnderlying`—then your LP tokens are worth more. Reserving in `pendingBets` prevents LP providers from gaming LP price with in-flight bets (sandwich or timing attacks).
 
-**5% goes to validators** — This is the `VALIDATOR_SHARE_PERCENTAGE` (500 basis points). It accumulates separately in a validator share balance, used to compensate network validators for securing the blockchain.
+**5% goes to validators** — This is the `VALIDATOR_SHARE_PERCENTAGE` (500 basis points). It accumulates in the validator share balance, used to compensate network validators for securing the blockchain.
 
-This split happens automatically on every bet. When someone wagers 100 tokens, 95 tokens increase the LP pool value, and 5 tokens go to the validator share accumulator.
+This split happens automatically on every bet. When someone wagers 100 tokens, 95 tokens are reserved in `pendingBets` and 5 tokens go to the validator share accumulator.
 
 :::tip The Math Behind Your Returns
-If 1 million tokens are wagered and the house wins (as it will, mathematically, over time), 950,000 tokens flow into the LP pool. Your share depends on what percentage of the pool you own. Own 1% of the LP tokens? You just earned 9,500 tokens from that volume.
+If 1 million tokens are wagered and the house wins (as it will, mathematically, over time), 950,000 tokens move from `pendingBets` into `totalUnderlying` via `resolveBet`. Your share depends on what percentage of the pool you own. Own 1% of the LP tokens? You just earned 9,500 tokens from that volume.
 :::
 
 ### How Payouts Work
 
-When games need to pay winners, the split works in reverse. The contract deducts from both pools proportionally:
+When games need to pay winners, the split works in reverse. For a winning bet, the game calls `payoutWin*` (with optional `betId`). The contract releases the reserved bet amount from `pendingBets` into `totalUnderlying` (when `betId` is used), then deducts the payout proportionally:
 
-- **95% of the payout** comes from the LP pool (your funds)
+- **95% of the payout** comes from the LP pool (`totalUnderlying`—your funds)
 - **5% of the payout** comes from the validator share
 
-This keeps the ratio balanced. You take 95% of the wins, you cover 95% of the losses. Fair and transparent.
+Lost bets are settled with `resolveBet(token, amount)`, which moves that amount from `pendingBets` to `totalUnderlying`. There is also `releaseBetPoolAmount(token, betId)` to release reserved funds without a payout when needed. This keeps the ratio balanced: you take 95% of the wins, you cover 95% of the losses. Fair and transparent.
 
-### The Validator Share Offset System
+### Validator Share Accounting
 
-Here's a technical detail that matters: the contract maintains a 100,000 token "offset" for the validator share. When a pool is first created, the validator share starts at 100,000 tokens (it's accounting magic, not real tokens).
-
-Why? This offset ensures the validator share can always absorb its 5% portion of payouts, even during the pool's early days. Without it, the first big win could drain the validator share to zero, breaking the 95/5 split.
-
-As bets accumulate, the validator share grows above 100,000 tokens. Validators can only withdraw the amount *above* this offset. The first 100,000 stays locked as a buffer. This design keeps the ratio stable no matter what happens.
-
-If unusual circumstances cause the validator share to drop below the offset, LP providers temporarily cover the deficit. This is factored into the "Effective Total Underlying" calculation for LP token pricing. It's rare but mathematically accounted for.
+Validator share is tracked per token as a signed value: it can be positive (surplus) or negative (deficit). When it goes negative—for example after many payouts before enough house edge has accumulated—LP providers effectively cover the shortfall. The contract uses **Effective Total Underlying** for LP token pricing: if validator share is negative, the deficit is subtracted from `totalUnderlying`, so the value of your LP tokens reflects this obligation. When validator share is positive, validators can withdraw only the portion **not** tied to pending bets (the share that backs in-flight bets is locked until those bets settle). You can query withdrawable validator share via `getWithdrawableValidatorShare(token)`.
 
 ### Verifying the Fees On-Chain
 
-Don't take our word for the fee structure—verify it yourself. The validator share parameters are hardcoded into the smart contract as constants:
+Don't take our word for the fee structure—verify it yourself. The validator share and epoch parameters are hardcoded or set at deployment:
 
 ```solidity
 uint16 public constant VALIDATOR_SHARE_PERCENTAGE = 500; // 5%
 uint16 public constant MAX_BASIS_POINTS = 10000; // 100%
-uint256 public constant VALIDATOR_SHARE_INITIAL_OFFSET = 100000e18; // 100,000 tokens
+uint256 public constant DEFAULT_EPOCH_LENGTH = 300; // 5 minutes (epochLength set at deployment)
 ```
 
 Everything is transparent and immutable. No hidden fees, no discretionary changes, no surprises. You can read these values directly from the contract on any block explorer.
@@ -114,22 +108,43 @@ Want to know exactly what your LP tokens are worth? It's simple math:
 LP Token Price = (Effective Total Underlying × 10¹⁸) / Total LP Token Supply
 ```
 
-The "Effective Total Underlying" is slightly more complex than just the raw balance. It accounts for the validator share system. Here's why: the contract maintains a validator share offset of 100,000 tokens as an accounting buffer. If the validator share dips below this offset due to large payouts, LP providers need to cover the deficit.
+The "Effective Total Underlying" accounts for validator share. The contract uses `getEffectiveTotalUnderlying(token)`:
 
-The formula for effective balance is:
+- If **validator share is negative** (deficit), the pool effectively owes that amount; the deficit is subtracted from `totalUnderlying`, so:  
+  `Effective Total Underlying = max(0, totalUnderlying - deficit)` where `deficit = -validatorShare`.
+- If **validator share is zero or positive**, `Effective Total Underlying = totalUnderlying`.
 
-```
-If validatorShare >= 100,000:
-    Effective Balance = totalUnderlying
+When validator share is in deficit, LPs effectively cover it—your withdrawable value is reduced accordingly. If effective total is zero, the pool is in a default state: LP price is 0 and deposits are disabled.
 
-If validatorShare < 100,000:
-    deficit = 100,000 - validatorShare
-    Effective Balance = max(0, totalUnderlying - deficit)
-```
+As the pool balance grows from game revenue (bets resolved as lost), the LP token supply stays constant, so the price per LP token increases. That price appreciation is your earnings. No claiming, no gas fees, just automatic value accrual.
 
-This ensures LP token pricing accurately reflects the true withdrawable value, accounting for any validator share obligations. In practice, as long as games are running normally, the validator share stays well above the offset and this doesn't impact your returns.
+### Withdrawals: Request Then Execute
 
-As the pool balance grows from game revenue, the LP token supply stays constant, so the price per LP token increases. That price appreciation is your earnings. No claiming, no gas fees, just automatic value accrual.
+Withdrawals are **two-phase**. You do not get underlying tokens immediately. First you **request** a withdrawal by calling `withdrawNative(lpAmount)` or `withdrawToken(token, lpAmount)`: the contract pulls your LP tokens and records your request for the current epoch. Then, after that epoch has **finished** and been **finalized**, you (or anyone) call `executeWithdrawNative()` or `executeWithdrawToken(token)` to burn the locked LP and receive underlying at the epoch snapshot price. See [Epochs and delayed withdrawals](#epochs-and-delayed-withdrawals) for the full flow and why this design exists.
+
+---
+
+## Epochs and Delayed Withdrawals
+
+Withdrawals are delayed by design so that LPs cannot game the timing of wins and losses. The pool uses **epochs**: fixed-length time windows (e.g. 5 minutes, `DEFAULT_EPOCH_LENGTH = 300` seconds). Epoch boundaries are defined by `epochZeroStart` and `epochLength`; you can read the current epoch with `getCurrentEpochId()`, and check if an epoch has ended with `isEpochFinished(epochId)` and `getEpochEndTimestamp(epochId)`.
+
+### Two-Phase Withdrawal Process
+
+1. **Request** — You call `withdrawNative(lpAmount)` or `withdrawToken(token, lpAmount)`. The contract pulls your LP tokens (no approval needed) and stores a withdraw request for the current epoch. Only **one** pending request per (user, token) is allowed; you cannot overwrite or cancel it—only execute it or leave it unexecuted.
+
+2. **Wait** — The requested epoch must **finish** (time passes). Then someone must call `finalizeEpoch(token, epochId)` for that token and epoch. Anyone can call it; it is idempotent. Finalization snapshots the LP price (from `getEffectiveTotalUnderlying` and LP supply) for that epoch. Without finalization, no one can execute withdrawals for that epoch. In practice, keepers or the frontend do this.
+
+3. **Execute** — After the epoch is finished and finalized, you (or anyone) call `executeWithdrawNative()` or `executeWithdrawToken(token)`. You receive underlying tokens (native CX or ERC20) based on the **snapshot** price at epoch end: payout = min(snapshot-based amount, your current proportional share). If the LP price went up after the snapshot, you get the snapshot amount (no benefit from delaying execution). If the LP price went down (e.g. after a big win), you get your current share so the withdrawal is not blocked. Your locked LP is burned.
+
+Frontends can use `getPendingWithdrawInfo(user, token)` to show the expected payout and whether execution is possible (`canExecute`).
+
+### Why Delayed Withdrawals?
+
+This design (C-04 mitigation) prevents a liquidity provider who is also a player from withdrawing based on pre-loss pricing: they cannot front-run a win or delay until after a loss to exit at a favorable price. Payout is fixed at the epoch-boundary snapshot, so the economic outcome is determined when you request, not when you execute.
+
+:::info Operational note
+Execution depends on someone calling `finalizeEpoch` for that (token, epoch). If no one does, withdrawals for that epoch cannot be executed. Keepers or the app typically finalize epochs promptly after they end.
+:::
 
 ---
 
@@ -204,14 +219,7 @@ CX Chain isn't naive about variance. There are smart contract-enforced protectio
 
 **Minimum bet limits** prevent dust transactions that could clog the system. The contract enforces `globalMinBet` (default: 1 token), but individual tokens can override this with their own minimum.
 
-**Maximum win caps** are the real protection. Even if someone lands a theoretically massive win, the actual payout is capped as a percentage of the total available funds (LP pool + withdrawable validator share). The formula is straightforward:
-
-```
-Total Available = LP Pool Balance + Withdrawable Validator Share
-Max Payout = Total Available × maxWin / 10000
-```
-
-The `maxWin` parameter is measured in basis points. A value of 500 means 5% of total available funds. The default is hardcoded as `globalMaxWin`, but each token can have its own override.
+**Maximum win caps** are the real protection. The maximum payout for each bet is **locked at bet placement** and stored with the bet ID. So even if `maxWin` or pool size changes later, that bet's cap does not change. In general: max payout = (total available funds at placement) × maxWin / 10000 (basis points). Total available = LP pool + pending bets + validator share (surplus or deficit). A value of 500 means 5% of total available. The default is `globalMaxWin`, but each token can have its own override.
 
 These protections are automatic and immutable. No governance vote needed, no admin intervention possible. The code enforces the limits on every payout. You can verify these limits by reading the contract:
 
@@ -219,6 +227,22 @@ These protections are automatic and immutable. No governance vote needed, no adm
 uint256 minBet = liquidityPool.getEffectiveMinBet(tokenAddress);
 uint16 maxWin = liquidityPool.getEffectiveMaxWin(tokenAddress);
 ```
+
+### Withdrawal Delay and Finalization
+
+Withdrawals are not instant. You must wait for the epoch to end and for that epoch to be finalized (someone must call `finalizeEpoch`). Only then can you execute and receive tokens. If no one finalizes an epoch, withdrawals for that epoch cannot be executed. In practice, keepers or the frontend handle finalization.
+
+### No Cancellation of Withdraw Requests
+
+Once you create a withdraw request, you cannot cancel it or change the amount. You can only execute it (after the epoch is finished and finalized) or never execute. Plan accordingly.
+
+### Validator Share Deficit
+
+If the validator share goes negative (e.g. many wins before enough house edge has accumulated), LPs cover the deficit. Your withdrawable value is reduced via `getEffectiveTotalUnderlying`: the deficit is subtracted from `totalUnderlying`, so LP token price and what you can withdraw drop until the share recovers.
+
+### Smart Contract and Dependency Risk
+
+As with any DeFi protocol, there is risk of bugs in the pool or in whitelisted game contracts, dependency on oracles or VRF, and (if applicable) upgrade or admin actions. Audit the contracts and understand the trust assumptions.
 
 ### The Bottom Line
 
@@ -245,12 +269,11 @@ When a game wants to handle a bet, here's the actual flow:
 
 1. **Player sends tokens to the game contract**
 2. **Game contract calls `depositBetToken()` or `depositBetNative()`** on the liquidity pool
-3. **Pool receives the bet amount and splits it:** 95% to `totalUnderlying`, 5% to `validatorShare`
+3. **Pool receives the bet amount:** 95% is reserved in `pendingBets`, 5% added to `validatorShare`. A unique `betId` is emitted and the maximum payout for this bet is stored (so later changes to `maxWin` or pool size do not affect it).
 4. **Game determines the outcome** (using VRF for randomness)
-5. **If player wins, game calls `payoutWinToken()` or `payoutWinNative()`**
-6. **Pool validates the payout amount** (checks max win limit, available funds)
-7. **Pool deducts 95% from LP pool, 5% from validator share**
-8. **Winner receives tokens directly** from the pool
+5. **If player wins,** game calls `payoutWinToken()` or `payoutWinNative()` (optionally with `betId`). **If player loses,** game calls `resolveBet(token, amount)` to move the reserved amount from `pendingBets` to `totalUnderlying`.
+6. **On payout:** Pool releases the reserved bet from `pendingBets` into `totalUnderlying` (when `betId` is used), validates the payout against the stored max payout, then deducts 95% from `totalUnderlying` and 5% from validator share.
+7. **Winner receives tokens directly** from the pool
 
 Notice the game never holds the pool's capital. It just coordinates the bet flow. The liquidity pool contract retains full custody of funds and enforces all limits. Games can't bypass the rules—they're enforced at the contract level.
 
@@ -272,7 +295,7 @@ This protects against accidental transfers and ensures clean accounting. Your de
 
 ### The Simple Version
 
-You deposit tokens. You get LP tokens. Games use the pool for payouts. Players lose to the house edge. Pool grows. Your LP tokens are worth more. You withdraw whenever you want. That's it.
+You deposit tokens. You get LP tokens. Games use the pool for payouts. Players lose to the house edge. Pool grows. Your LP tokens are worth more. You request a withdrawal, then after the epoch ends and is finalized you execute and receive tokens. That's it.
 
 ### Why This Matters
 
