@@ -4,18 +4,18 @@ sidebar_position: 2
 
 # Token Economics
 
-Most blockchains have a token problem: the rich get richer, and everyone else gets diluted. CX Chain takes a different approach with a dual-asset system that separates economic participation from network control. Let's break down how it works and why it matters.
+Most blockchains have a token problem: the rich get richer, and everyone else gets diluted. CX Chain takes a different approach with a dual-asset system that separates economic participation from network control. The CX token is the platform's rewards and utility asset. Let's break down how it works and why it matters.
 
 ## Two Assets, Two Purposes
 
-Think of CX Chain's economy as having two different types of keys. The **CX token** is like cash—you use it for transactions, governance, and earning yield through liquidity provision. It's fungible, divisible, and there are a billion of them.
+Think of CX Chain's economy as having two different types of keys. The **CX token** is like a rewards program—it gives you rakeback, access to exclusive member areas and games, free tournament play, customizable gaming experiences, and developer access. It's fungible, divisible, and there are one billion of them.
 
-The **House Node License NFT** is like a property deed—it grants you the right to validate transactions and earn protocol fees. It's non-fungible, indivisible, and there are only 1,000 of them. Ever.
+The **House Node License NFT** is like a property deed—it grants you the right to validate transactions and earn a share of the fees the liquidity pools generate. It's non-fungible, indivisible, and there are only 1,000 of them. Ever.
 
 | What It Is | Type | How Many | What It Does |
 |------------|------|----------|--------------|
-| **CX Token** | Fungible (ERC-20) | 1,000,000,000 | Governance voting, transaction fees, liquidity provision, developer collateral |
-| **House Node License** | NFT (ERC-721) | 1,000 total | Run validators, earn protocol fees, participate in governance |
+| **CX Token** | Fungible (ERC-20) | 1,000,000,000 | Rakeback, free tournament play, customizable gaming experiences, access to exclusive games and events, developer access |
+| **House Node License** | NFT (ERC-721) | 1,000 total | Run validators, earn protocol fees (including a share of liquidity pool fees), participate in governance |
 
 :::tip Why Two Assets?
 By separating validation rights from token wealth, we prevent plutocracy. You can't just buy a billion tokens and dominate the network. You need a House Node License, and there are only 1,000 of those. This design choice keeps the network decentralized even as token distribution becomes more concentrated over time.
@@ -25,15 +25,9 @@ By separating validation rights from token wealth, we prevent plutocracy. You ca
 
 There are exactly one billion CX tokens, minted at genesis. No more will ever be created—in fact, the supply constantly decreases through fee burning. Let's look at what you can actually do with them.
 
-### Governance Participation
+### Pay for Network Operations and Supply Reduction
 
-CX tokens are designed to serve as the governance vehicle for the protocol. Token holders will be able to participate in protocol decisions regarding new game additions, smart contract approvals, and infrastructure upgrades. The governance system is being developed to work in combination with the NFT-based validation system to maintain decentralization.
-
-### Pay for Network Operations
-
-Every transaction costs a small amount of CX. Validators pay fees to process transactions. Developers pay fees to deploy contracts. Liquidity providers pay fees to manage positions. Players... well, player transaction fees are often subsidized by the protocol to encourage participation.
-
-Here's the interesting part: a portion of every fee gets burned (flared) forever. The supply shrinks with every transaction. More activity means more burning means more scarcity. It's programmatic supply reduction without the complexity of traditional buybacks or the uncertainty of discretionary burns.
+The chain is gasless for users—player transaction costs are covered by the protocol. Transaction fees still exist (validators and the protocol treasury receive a share), and a portion of every fee gets burned forever. The supply shrinks with every transaction. More activity means more burning means more scarcity. It's programmatic supply reduction without the complexity of traditional buybacks or the uncertainty of discretionary burns. The CX Chain Foundation purchases CX from the open market to feed the "gas station" that covers the chain's transaction costs; see [Token Buybacks](#token-buybacks) below.
 
 ### Earn as the House
 
@@ -45,9 +39,34 @@ The compounding happens automatically—no claiming, no restaking, no gas fees. 
 
 Building a game on CX Chain? You'll need to deposit collateral in CX tokens. This isn't a toll—it's a security mechanism. If your contract has bugs or you try something malicious, you lose your collateral through slashing. Build quality games, earn your collateral back plus revenue. Build garbage, lose money. Incentives aligned.
 
-### Get Player Perks (Optional)
+### Rakeback
 
-Holding CX tokens can unlock player benefits like access to exclusive games, rake rebates ranging from 10-30% depending on your holdings, eligibility for rake-free gameplay periods, and the ability to wager directly in CX tokens. These are optional features—you can play without holding CX—but they reward long-term community members.
+Buy and stake CX to earn a higher rakeback (poker) or cashback (chance games). Tiers are based on your staked balance:
+
+| Staked CX | Rakeback (Poker) / Cashback (chance games) |
+|-----------|-------------------------------------------|
+| 0 – 500,000 | 1% |
+| 500,001 – 1,000,000 | 2% |
+| 1,000,000 – 3,000,000 | 3% |
+| 5,000,000+ | 5% |
+
+### Free Tournament Play
+
+By holding more than 500,000 CX you gain access to free-entry tournament play. CX Chain hosts daily guaranteed-payout, free-entry Poker Tournaments for token holders.
+
+### Access to Exclusive Games
+
+Staking CX tokens grants access to an exclusive set of game variants—for example 7-2 Bonus, 6-9 Bonus, Dramaha, and more. Want to get weird? That's where your stake gets you in.
+
+### Fully Customizable Experience
+
+Want a unique avatar or a custom poker room interface? CX tokens give you the ability to customize your gaming experience on the platform.
+
+---
+
+## Token Buybacks
+
+From time to time, the CX Chain Foundation participates in token buybacks. Because the chain is gasless for users, the Foundation must purchase CX tokens from the open market to feed the "gas station" that covers the chain's transaction costs. This is separate from (and can complement) the treasury buybacks described in [How the Supply Shrinks Over Time](#how-the-supply-shrinks-over-time).
 
 ---
 
@@ -59,7 +78,7 @@ Here's the thing about traditional proof-of-stake: you need a fortune in tokens 
 
 There will only ever be 1,000 House Node Licenses. Not 1,000 per year, not 1,000 until we change our mind—1,000 total, forever. The first batch of 250 has already been distributed. Future batches will come gradually, and once all 1,000 are out, that's it.
 
-These NFTs are fully transferable on standard NFT marketplaces. Got a license but don't want to validate anymore? Sell it. Want to get into validation? Buy one on the secondary market or wait for the next batch release.
+These NFTs are fully transferable on standard NFT marketplaces. Got a license but don't want to validate anymore? Sell it or lease it. Want to get into validation? Buy one on the secondary market or wait for the next batch release.
 
 :::warning Limited Supply = Real Scarcity
 The 1,000-license cap isn't arbitrary marketing—it's a security feature. Too many validators and the network becomes unwieldy. Too few and it becomes centralized. 1,000 is the sweet spot, and the scarcity creates economic value that incentivizes proper validation behavior.
@@ -67,9 +86,7 @@ The 1,000-license cap isn't arbitrary marketing—it's a security feature. Too m
 
 ### What a License Gets You
 
-**Run a Validator Node**: With a license, you can operate a validator, process transactions, and participate in network consensus. You earn protocol fees from every transaction on the network—the more activity, the more you earn.
-
-**Accept Delegations**: Other users can delegate their assets to your validator, and you earn a cut of their staking rewards. Note that delegators must hold a minimum amount of CX tokens as collateral (e.g., 10% of delegated value). It's like running a validation-as-a-service business, except the protocol handles all the complicated stuff.
+**Run a Validator Node**: With a license, you can operate a validator, process transactions, and participate in network consensus. As a node holder you earn 30% of the fees the liquidity pools generate, with zero collateral risk. You can also participate in governance.
 
 ### How to Actually Run a Validator
 
@@ -77,7 +94,7 @@ You've got two paths here. **Self-operate** if you're technically capable and wa
 
 Or **delegate to a service** like Hypha. They handle all the technical operations—hardware, software, updates, monitoring—while you retain the fee and revenue rights. You still earn, they still earn, everyone's happy. This is perfect if you want validator income without validator headaches.
 
-The genius of the NFT model is that it completely eliminates minimum token staking. A whale with a billion CX tokens can't run 100 validators. They can run exactly as many validators as they have licenses, same as everyone else. Validation power is capped and democratized.
+The genius of the NFT model is that it completely eliminates minimum token staking for validation rights. A whale with a billion CX tokens can't run 100 validators. They can run exactly as many validators as they have licenses, same as everyone else. Validation power is capped and democratized.
 
 ---
 
@@ -149,9 +166,9 @@ Nobody succeeds at others' expense. Everyone succeeds together, or the protocol 
 
 ## Bringing It All Together
 
-Let's recap the token economy: **CX tokens** are used for governance participation, transaction fees, liquidity provision, developer collateral, and optional player perks. **House Node Licenses** grant validation rights, generate fee income, and prevent plutocracy.
+Let's recap the token economy: The **CX token** is like a rewards program—it helps you access rakeback, exclusive member areas on the platform, access to exclusive games and free tournaments, the ability to customize your gaming experience, and more. Developers put skin in the game with CX collateral.
 
-The supply is **deflationary by design**—a portion of every transaction fee burns forever, with optional treasury buybacks on top. **Slashing mechanisms** make misbehavior expensive. **Vesting schedules** ensure team alignment over years, not quarters.
+The supply is **deflationary by design**—a portion of every transaction fee burns forever, with optional treasury buybacks (and Foundation buybacks for the gas station) on top. **Slashing mechanisms** make misbehavior expensive. **Vesting schedules** ensure team alignment over years, not quarters.
 
 Everything fits together to create a system where long-term thinking beats short-term extraction. That's rare in crypto. It's what makes CX Chain worth paying attention to.
 
