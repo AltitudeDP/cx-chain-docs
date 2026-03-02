@@ -1,0 +1,8 @@
+{
+  "label": "Card Games",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "How CX Chain's provably fair card games work — mental poker, zero-knowledge proofs, smart wallets, and on-chain hand evaluation."
+  }
+}
