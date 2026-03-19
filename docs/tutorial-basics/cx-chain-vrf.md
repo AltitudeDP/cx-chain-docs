@@ -111,6 +111,8 @@ sequenceDiagram
 
 CX Chain has several game contracts already deployed and operational. Each one uses the VRF system to ensure provably fair outcomes. Let's look at what's available.
 
+For quick reference on game economics: **Coinflip 3%**, **Dice 3%**, **Range 3%**, and **Wheel 4%** house edge.
+
 ### Roulette
 
 CX Chain offers European roulette with numbers 0 through 36 and all the classic bet types you'd expect: straight bets on individual numbers, color bets (red/black), odd/even, dozens, columns, streets, splits, and corners. Every spin uses VRF to generate the winning number, ensuring complete fairness.
@@ -123,19 +125,25 @@ Players can choose the variant that matches their preference—whether they prio
 
 Picture a prize wheel divided into segments, each with its own reward value and probability. You place your bet, VRF spins the wheel, and wherever it lands determines your prize. The beauty of wheel games is their flexibility—different segments can have wildly different payouts, from small frequent wins to rare jackpots.
 
-The randomness is completely fair thanks to VRF. Over thousands of spins, the distribution matches the programmed probabilities exactly. You're not trusting the operator to be fair; you're trusting mathematics to be consistent. Multiple prize tiers make wheel games exciting while maintaining the house edge that keeps liquidity providers profitable.
+The randomness is completely fair thanks to VRF. Over thousands of spins, the distribution matches the programmed probabilities exactly. You're not trusting the operator to be fair; you're trusting mathematics to be consistent. Wheel games use a **4% house edge**, and with a 25-sector setup this is compatible with high-tier outcomes like **x24** appearing at a **1/25** frequency while still preserving long-term pool profitability.
+
+### Coinflip
+
+Coinflip is the cleanest possible VRF game: pick heads or tails, lock your bet, and let VRF resolve the outcome. It's fast, transparent, and easy to reason about because there are only two possible results.
+
+Coinflip uses a **3% house edge**, balancing near-even odds for players with predictable long-term returns for liquidity providers.
 
 ### Dice Games
 
 Dice games on CX Chain are refreshingly simple: VRF rolls the dice, and you bet on the outcome. The classic mechanics translate perfectly to blockchain—you can bet over/under a target number, predict specific results, or choose ranges. Each bet type comes with its own multiplier based on the mathematical probability.
 
-What makes dice games popular is the favorable odds. While roulette has a 2.7% house edge, dice games often have lower edges, giving players better odds while still ensuring long-term profitability for the liquidity pools. It's a sweet spot between player fairness and sustainable economics.
+What makes dice games popular is the favorable odds. Dice uses a **3% house edge**, which gives players competitive payout profiles while still ensuring long-term profitability for the liquidity pools.
 
 ### Range Games
 
 Range games offer a simple but engaging mechanic: you choose a numerical range, and VRF generates a random number. If the result falls within your chosen range, you win. The wider your range, the higher your chances of winning but the lower the payout multiplier. The narrower your range, the riskier the bet but the bigger the potential reward.
 
-This creates an interesting risk-reward dynamic where players can customize their betting strategy. Want high probability with modest returns? Pick a wide range. Feeling lucky and want a big multiplier? Go narrow. Every outcome is determined by VRF, ensuring complete fairness regardless of your range selection.
+This creates an interesting risk-reward dynamic where players can customize their betting strategy. Want high probability with modest returns? Pick a wide range. Feeling lucky and want a big multiplier? Go narrow. Range games use a **3% house edge**, and every outcome is determined by VRF, ensuring complete fairness regardless of your range selection.
 
 ### Building Your Own VRF-Enabled Game
 
