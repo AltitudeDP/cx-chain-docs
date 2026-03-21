@@ -49,6 +49,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          routeBasePath: '/',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -80,7 +81,6 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'CX Chain',
       logo: {
         alt: 'CX Chain Logo',
         src: 'img/logo.svg',
@@ -107,19 +107,19 @@ const config: Config = {
           items: [
             {
               label: 'Introduction',
-              to: '/docs/intro',
+              to: '/',
             },
             {
               label: 'Platform Overview',
-              to: '/docs/tutorial-basics/what-is-cx-chain',
+              to: '/tutorial-basics/what-is-cx-chain',
             },
             {
               label: 'VRF Integration',
-              to: '/docs/tutorial-basics/cx-chain-vrf',
+              to: '/tutorial-basics/cx-chain-vrf',
             },
             {
               label: 'Liquidity Pools',
-              to: '/docs/tutorial-basics/what-are-liquidity-pools',
+              to: '/tutorial-basics/what-are-liquidity-pools',
             },
           ],
         },

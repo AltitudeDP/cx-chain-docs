@@ -33,7 +33,7 @@ The chain is gasless for users—player transaction costs are covered by the pro
 
 Deposit CX tokens into liquidity pools and you're effectively becoming the casino. Your tokens provide capital for game payouts, and you earn a share of the house edge. You receive LP tokens that represent your proportional ownership, and as the pool grows from player losses, your LP tokens become worth more.
 
-The compounding happens automatically—no claiming, no restaking, no gas fees. Just deposit and watch your slice of the pool appreciate. We'll dive deeper into this in the [Liquidity Pools](/docs/tutorial-basics/what-are-liquidity-pools) section.
+The compounding happens automatically—no claiming, no restaking, no gas fees. Just deposit and watch your slice of the pool appreciate. We'll dive deeper into this in the [Liquidity Pools](/tutorial-basics/what-are-liquidity-pools) section.
 
 ### Put Skin in the Game as a Developer
 
@@ -172,4 +172,4 @@ The supply is **deflationary by design**—a portion of every transaction fee bu
 
 Everything fits together to create a system where long-term thinking beats short-term extraction. That's rare in crypto. It's what makes CX Chain worth paying attention to.
 
-Want to understand how liquidity provision actually works in practice? Check out the [Liquidity Pools](/docs/tutorial-basics/what-are-liquidity-pools) documentation next.
+Want to understand how liquidity provision actually works in practice? Check out the [Liquidity Pools](/tutorial-basics/what-are-liquidity-pools) documentation next.

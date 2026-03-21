@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+slug: /
 ---
 
 # Welcome to CX Chain
@@ -28,13 +29,13 @@ The **economic layer** ties it all together with the CX token (used for transact
 
 We've organized everything to take you from curious newcomer to confident participant:
 
-**[Platform Overview](/docs/tutorial-basics/what-is-cx-chain)** starts with the big picture—what CX Chain does and why it matters. You'll understand the architecture without drowning in technical details.
+**[Platform Overview](/tutorial-basics/what-is-cx-chain)** starts with the big picture—what CX Chain does and why it matters. You'll understand the architecture without drowning in technical details.
 
-**[Token Economics](/docs/tutorial-basics/intro-to-cx-chain-tokens)** explains the dual-asset model: CX tokens and House Node Licenses. You'll see how the deflationary tokenomics work and why separating planned governance from validation rights matters.
+**[Token Economics](/tutorial-basics/intro-to-cx-chain-tokens)** explains the dual-asset model: CX tokens and House Node Licenses. You'll see how the deflationary tokenomics work and why separating planned governance from validation rights matters.
 
-**[Liquidity Pools](/docs/tutorial-basics/what-are-liquidity-pools)** breaks down how you can become the house by providing capital. We'll show you the math behind APY calculations and explain why automatic compounding is such a game-changer.
+**[Liquidity Pools](/tutorial-basics/what-are-liquidity-pools)** breaks down how you can become the house by providing capital. We'll show you the math behind APY calculations and explain why automatic compounding is such a game-changer.
 
-**[VRF Integration](/docs/tutorial-basics/cx-chain-vrf)** dives into the technical magic that makes provably fair gaming possible. Don't worry—we explain the complex cross-chain VRF flow in plain language.
+**[VRF Integration](/tutorial-basics/cx-chain-vrf)** dives into the technical magic that makes provably fair gaming possible. Don't worry—we explain the complex cross-chain VRF flow in plain language.
 
 :::tip Start Here
 If you're a player curious about fairness, jump to the VRF section. If you're interested in earning yield, start with Liquidity Pools. If you want the full picture, just keep reading in order.

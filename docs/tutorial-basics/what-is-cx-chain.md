@@ -90,7 +90,7 @@ The simplest entry point is just playing. Game contracts are live right now on t
 
 If you're more interested in consistent returns than adrenaline rushes, liquidity provision might be your angle. Deposit tokens into a pool, receive LP tokens, and watch your balance grow as players lose to the house edge. The math is simple: games are designed to favor the house, and you *are* the house.
 
-Check out the [Liquidity Pools](/docs/tutorial-basics/what-are-liquidity-pools) documentation for detailed mechanics, APY calculations, and risk factors. Spoiler: the main risk is short-term variance, but the long-term expected value is positive.
+Check out the [Liquidity Pools](/tutorial-basics/what-are-liquidity-pools) documentation for detailed mechanics, APY calculations, and risk factors. Spoiler: the main risk is short-term variance, but the long-term expected value is positive.
 
 ### Validate as a Node Operator
 

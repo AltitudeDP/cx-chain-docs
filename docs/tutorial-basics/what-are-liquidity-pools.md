@@ -304,7 +304,7 @@ CX Chain's liquidity pools flip the traditional casino model. Instead of one ope
 The automatic compounding eliminates the friction and gas costs of traditional yield farming. The transparent fees mean no hidden cuts. The single-token model eliminates impermanent loss. The house edge guarantees positive expected value over time.
 
 :::tip Your Next Steps
-Ready to become the house? Head to the CX Chain app and check out the live pools. Want to understand the technical magic that makes provably fair gaming possible? Read the [VRF Integration](/docs/tutorial-basics/cx-chain-vrf) documentation next.
+Ready to become the house? Head to the CX Chain app and check out the live pools. Want to understand the technical magic that makes provably fair gaming possible? Read the [VRF Integration](/tutorial-basics/cx-chain-vrf) documentation next.
 :::
 
 Liquidity provision on CX Chain isn't complicated. It's just a better way to earn yield from gaming revenue—transparent, automated, and mathematically sound.

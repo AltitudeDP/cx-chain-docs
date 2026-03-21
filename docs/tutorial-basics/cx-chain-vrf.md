@@ -240,8 +240,8 @@ That's the difference.
 
 You now understand how VRF makes gaming provably fair on CX Chain. The cross-chain architecture is complex, but it leverages battle-tested Chainlink infrastructure instead of reinventing cryptography. The timing vulnerability exists but is mitigatable through proper game design.
 
-Want to understand how liquidity providers earn from these games? Check out [Liquidity Pools](/docs/tutorial-basics/what-are-liquidity-pools).
+Want to understand how liquidity providers earn from these games? Check out [Liquidity Pools](/tutorial-basics/what-are-liquidity-pools).
 
-Want to understand the token economics that power the whole system? Read about [Token Economics](/docs/tutorial-basics/intro-to-cx-chain-tokens).
+Want to understand the token economics that power the whole system? Read about [Token Economics](/tutorial-basics/intro-to-cx-chain-tokens).
 
 Or just head to the CX Chain app and try a game. Every spin is provably fair, and now you know exactly why.
